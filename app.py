@@ -7,9 +7,8 @@ from collections import defaultdict
 import json
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  
 
-# --- CONFIG ---
 FAITH_STUDIES = ["discovery", "source", "growth", "trust", "commission"]
 
 def get_next_faith_study(completed):
@@ -60,7 +59,7 @@ def process_csv_data(df):
         led_col_index = df.columns.get_loc("Please indicate which faith studies you have led:")
         availability_cols = df.columns[led_col_index+1:]
     except KeyError:
-        # Fallback: look for columns containing time slots
+        # look for columns containing time slots
         availability_cols = [col for col in df.columns if 'timeslot' in col.lower() or '[' in col and ']' in col]
     
     people = []
